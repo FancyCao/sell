@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueResource from 'vue-resource';
 import App from './App';
 import goods from 'components/goods/goods';
 import ratings from 'components/ratings/ratings';
@@ -7,7 +8,8 @@ import seller from 'components/seller/seller';
 
 import 'common/stylus/index.styl';
 
-Vue.use(VueRouter);
+Vue.use(VueRouter); // 全局注册
+Vue.use(VueResource); // 全局注册
 
 let app = Vue.extend(App);
 
