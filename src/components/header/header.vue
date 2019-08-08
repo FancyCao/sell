@@ -17,8 +17,38 @@
             <span class="text">{{seller.supports[0].description}}</span>
           </div>
         </div>
+        <div v-if="seller.supports" class="support-count" @click="showDetail">
+          <span class="count">{{seller.supports.length}}个</span>
+          <i class="icon-keyboard_arrow_right"></i>
+        </div>
       </div>
-      <div class="bulletin-wrapper"></div>
+      <div class="bulletin-wrapper" @click="showDetail">
+        <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
+        <i class="icon-keyboard_arrow_right"></i>
+      </div>
+      <div class="background">
+        <img :src="seller.avatar" width="100%" height="100%" alt="">
+      </div>
+      <div v-show="detailShow" class="detail">
+        <div class="detail-wrapper clearfix">
+          <div class="detail-main">
+            <p>{{seller.bulletin}}</p>
+            <p>{{seller.bulletin}}</p>
+            <p>{{seller.bulletin}}</p>
+            <p>{{seller.bulletin}}</p>
+            <p>{{seller.bulletin}}</p>
+            <p>{{seller.bulletin}}</p>
+            <p>{{seller.bulletin}}</p>
+            <p>{{seller.bulletin}}</p>
+            <p>{{seller.bulletin}}</p>
+            <p>{{seller.bulletin}}</p>
+            <p>{{seller.bulletin}}</p>
+          </div>
+        </div>
+        <div class="detail-close">
+          <i class="icon-close"></i>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -27,6 +57,16 @@ export default {
   props: {
     seller: {
       type: Object
+    }
+  },
+  data() {
+    return {
+      detailShow: false
+    };
+  },
+  methods: {
+    showDetail() {
+      this.detailShow = true;
     }
   },
   created() {
@@ -39,24 +79,26 @@ export default {
   @import "../../common/stylus/mixin.styl"
 
   .header
+    position: relative
     color: rgb(255,255,255)
-    background: #000
+    background: rgba(7,17,27,0.5)
+    overflow: hidden //解决设置背景图片滤镜之后图片溢出的问题
     .content-wrapper
+      position: relative
       padding: 24px 12px 18px 24px
-      font-size: 0
+      font-size: 0 // 为了解决两个行级元素之间有间距的问题
       .avatar
         display: inline-block
         vertical-align: top // 把元素的顶端与行中最高元素的顶端对齐
         img
           border-radius: 2px
       .content
-        // border: 1px solid red
         display: inline-block
         margin-left: 16px
         .title
           margin: 2px 0 8px 0
           .brand
-            display: inline-block
+            display: inline-block // 要设置图片的宽高必须设置（display: inline-block）
             vertical-align: top // 把元素的顶端与行中最高元素的顶端对齐
             width: 30px
             height: 18px
@@ -74,7 +116,7 @@ export default {
           line-height: 12px
         .support
           .icon
-            display: inline-block
+            display: inline-block // 要设置图片的宽高必须设置（display: inline-block）
             vertical-align: top // 把元素的顶端与行中最高元素的顶端对齐
             width: 12px
             height: 12px
@@ -92,6 +134,85 @@ export default {
             &.special
               bg-image('special_1')
           .text
+            display: inline-block // 为了调整上下的高度
+            margin-top: 1.5px
             line-height: 12px
             font-size: 10px
+      .support-count
+        position: absolute
+        right: 12px
+        bottom: 14px
+        padding: 0px 8px
+        height: 24px
+        line-height: 24px
+        border-radius: 12px
+        background: rgba(0,0,0,0.2)
+        text-align: center
+        .count
+          display: inline-block // 为了调整上下的高度
+          vertical-align: top
+          margin-top: 1px
+          font-size: 10px
+        .icon-keyboard_arrow_right
+          margin-left: 2px
+          line-height: 24px
+          font-size: 10px
+    .bulletin-wrapper
+      position: relative
+      height: 28px
+      line-height: 28px
+      padding: 0 22px 0 12px
+      white-space: nowrap // 规定段落中的文本不进行换行
+      overflow: hidden // 内容会被修剪，并且其余内容是不可见的
+      text-overflow: ellipsis // 显示省略符号来代表被修剪的文本(三个组合实现...效果)
+      background: rgba(7,17,27,0.2)
+      // font-size: 0
+      .bulletin-title
+        display: inline-block
+        vertical-align: top // 把元素的顶端与行中最高元素的顶端对齐        
+        margin-top: 8px
+        width: 22px
+        height: 12px
+        bg-image('bulletin')
+        background-size: 22px 12px
+        background-repeat: no-repeat
+      .bulletin-text
+        vertical-align: top // 把元素的顶端与行中最高元素的顶端对齐  
+        margin: 0px 4px
+        font-size: 10px
+      .icon-keyboard_arrow_right
+        position: absolute
+        font-size: 10px
+        line-height: 28px
+        right: 12px
+        // top: 9px
+    .background
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      z-index: -1
+      filter: blur(10px) // css3滤镜
+    .detail
+      position: fixed
+      z-index: 100
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      overflow: auto 
+      background: rgba(7,17,27,0.8)
+      .detail-wrapper
+        min-height: 100%
+        .detail-main
+          margin-top: 64px
+          padding-bottom: 64px
+      .detail-close
+        position: relative
+        width: 32px
+        height: 32px
+        margin: -64px auto 0 auto
+        clear: both
+        font-size: 32px
 </style>
