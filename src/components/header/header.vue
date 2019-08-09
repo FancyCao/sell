@@ -32,17 +32,10 @@
       <div v-show="detailShow" class="detail">
         <div class="detail-wrapper clearfix">
           <div class="detail-main">
-            <p>{{seller.bulletin}}</p>
-            <p>{{seller.bulletin}}</p>
-            <p>{{seller.bulletin}}</p>
-            <p>{{seller.bulletin}}</p>
-            <p>{{seller.bulletin}}</p>
-            <p>{{seller.bulletin}}</p>
-            <p>{{seller.bulletin}}</p>
-            <p>{{seller.bulletin}}</p>
-            <p>{{seller.bulletin}}</p>
-            <p>{{seller.bulletin}}</p>
-            <p>{{seller.bulletin}}</p>
+            <h1 class="name">{{seller.name}}</h1>
+            <div class="star-wrapper">
+              <star :size="48" :score="seller.score"></star>
+            </div>
           </div>
         </div>
         <div class="detail-close">
@@ -53,6 +46,8 @@
 </template>
 
 <script type='text/ecmascript-6'>
+import star from 'components/star/star';
+
 export default {
   props: {
     seller: {
@@ -71,6 +66,9 @@ export default {
   },
   created() {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
+  },
+  components: {
+    star
   }
 };
 
@@ -161,7 +159,7 @@ export default {
       position: relative
       height: 28px
       line-height: 28px
-      padding: 0 22px 0 12px
+      padding: 0 12px 0 12px
       white-space: nowrap // 规定段落中的文本不进行换行
       overflow: hidden // 内容会被修剪，并且其余内容是不可见的
       text-overflow: ellipsis // 显示省略符号来代表被修剪的文本(三个组合实现...效果)
@@ -183,7 +181,7 @@ export default {
       .icon-keyboard_arrow_right
         position: absolute
         font-size: 10px
-        line-height: 28px
+        line-height: 28px // 为了调整箭头的上下位置
         right: 12px
         // top: 9px
     .background
@@ -201,13 +199,23 @@ export default {
       left: 0
       width: 100%
       height: 100%
-      overflow: auto 
+      overflow: auto // 超出部分使用滚动条进行展示
       background: rgba(7,17,27,0.8)
       .detail-wrapper
+        width: 100%
         min-height: 100%
         .detail-main
           margin-top: 64px
           padding-bottom: 64px
+          .name
+            line-height: 16px
+            text-align: center
+            font-size: 16px
+            font-weight: 700 
+          .star-wrapper
+            margin-top: 16px
+            padding: 2px 0
+            text-align: center
       .detail-close
         position: relative
         width: 32px
