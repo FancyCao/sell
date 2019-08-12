@@ -223,7 +223,7 @@ export default {
       height: 100%
       overflow: auto // 超出部分使用滚动条进行展示
       transition: all 0.5s
-      backdrop-filter: blur(10px)
+      backdrop-filter: blur(10px) // 仅iphone有效
       &.fade-transition
         opacity: 1
         background: rgba(7,17,27,0.8)
