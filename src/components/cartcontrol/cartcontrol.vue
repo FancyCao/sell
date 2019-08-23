@@ -28,9 +28,10 @@ export default {
             } else {
                 this.food.count++;
             }
+            this.$dispatch('cart.add', event.target);
         },
         decreaseCart(event) {
-             if (!event._constructed) {
+            if (!event._constructed) {
                 return;
             }
             if (this.food.count) {

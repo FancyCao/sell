@@ -36,7 +36,7 @@
         </li>
       </ul>
     </div>
-    <shopcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+    <shopcart v-ref:shopcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
@@ -76,7 +76,7 @@ export default {
       let foods = [];
       this.goods.forEach((good) => {
         good.foods.forEach((food) => {
-          if (food.count) {
+          if (food.count) { // 如果存在food.count则将这个food对象添加到foods数组中，并将其传到shopcart组件中
             foods.push(food);
           }
         });
@@ -108,6 +108,12 @@ export default {
       this.foodsScroll.scrollToElement(el, 300);
       // console.log(index);
     },
+    _drop(target) {
+      // 体验优化，异步执行下落动画
+      this.$nextTick(() => {
+        this.$refs.shopcart.drop(target);
+      });
+    },
     _initScroll() {
       this.menuScroll = new BScroll(this.$els.menuWrapper, {
         click: true
@@ -136,6 +142,11 @@ export default {
   components: {
     shopcart,
     cartcontrol
+  },
+  events: {
+    'cart.add'(target) {
+      this._drop(target);
+    }
   }
 };
 
