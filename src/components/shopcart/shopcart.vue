@@ -134,7 +134,7 @@ export default {
             let show = !this.fold;
             if (show) {
                 this.$nextTick(() => {
-                    if (!this.scroll) {
+                    if (!this.scroll) { // 并不是每次都要new一个BScroll
                         this.scroll = new BScroll(this.$els.listContent, {
                             click: true
                         });
@@ -352,7 +352,7 @@ export default {
                     font-size: 12px
                     color: rgb(0,160,220)
             .list-content
-                padding: 18px
+                padding: 0 18px
                 max-height: 217px
                 overflow: hidden
                 background: #fff
@@ -384,7 +384,7 @@ export default {
         width: 100%
         height: 100%
         z-index: 40
-        backdrop-filter: blur(10px)
+        backdrop-filter: blur(10px) // 仅iphone有效
         &.fade-transition
             transition: all 0.5s
             opacity: 1
