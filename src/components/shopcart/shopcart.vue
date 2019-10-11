@@ -29,7 +29,7 @@
           </div>
           <div class="list-content" v-el:list-content>
               <ul>
-                  <li class="food" v-for="food in selectFoods" :key="food">
+                  <li class="food border-1px" v-for="food in selectFoods" :key="food">
                       <span class="name">{{food.name}}</span>
                       <div class="price">
                           <span>￥{{food.price * food.count}}</span>
